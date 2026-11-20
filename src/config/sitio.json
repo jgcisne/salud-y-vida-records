@@ -5,7 +5,7 @@
   "lema": "TODO SE TRATA DE JESÚS",
   "fundador": "Siervo del Señor Juan Cisneros",
   "firma": "© Salud y Vida Records — Siervo del Señor Juan Cisneros",
-  "dominio": "https://saludyvidarecords.pages.dev",
+  "dominio": "https://salud-y-vida-records.pages.dev",
   "descripcion": "Cánticos bíblicos, reflexiones y estudios de la Palabra de Dios según la Santa Biblia Reina-Valera 1909 (RVR1909). Todo se trata de Jesús.",
 
   "versiculoDestacado": { "libro": "colosenses", "capitulo": 1, "versiculo": 28 },
@@ -13,7 +13,7 @@
   "youtube": {
     "_ayuda": "Pegue aquí el enlace oficial de su canal, por ejemplo https://www.youtube.com/@SuCanal. Los videos se agregan con su ID (las 11 letras después de v= en el enlace del video).",
     "nombreCanal": "El Mesías — Salud y Vida Records",
-    "urlCanal": "",
+    "urlCanal": "https://www.youtube.com/@SaludyVidaRecords",
     "videos": [],
     "listas": []
   },
