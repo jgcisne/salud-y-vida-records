@@ -1,0 +1,17 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { libros } from '../../../lib/biblia';
+export function getStaticPaths() { return libros.map((l) => ({ params: { libro: l.slug }, props: { l } })); }
+const { l } = Astro.props;
+---
+<Base titulo={`${l.libro} (RVR1909)`} descripcion={`Lea el libro de ${l.libro} en la Santa Biblia Reina-Valera 1909 (RVR1909): ${l.capitulos.length} capítulos.`}>
+  <header class="cab-pagina"><div class="contenedor">
+    <div class="migas"><a href="/">Inicio</a> › <a href="/biblia/">Biblia</a> › {l.libro}</div>
+    <h1>{l.libro}</h1>
+    <p class="sub">{l.testamento === 'AT' ? 'Antiguo' : 'Nuevo'} Testamento · {l.capitulos.length} {l.capitulos.length === 1 ? 'capítulo' : 'capítulos'} · RVR1909</p>
+  </div></header>
+  <section class="banda"><div class="contenedor">
+    <h2 class="sr">Capítulos</h2>
+    <nav class="capitulos" aria-label={`Capítulos de ${l.libro}`}>{l.capitulos.map((_, i) => <a href={`/biblia/${l.slug}/${i + 1}/`} aria-label={`${l.libro} capítulo ${i + 1}`}>{i + 1}</a>)}</nav>
+  </div></section>
+</Base>

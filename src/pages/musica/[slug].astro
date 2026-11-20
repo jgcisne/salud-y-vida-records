@@ -1,0 +1,58 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Cubierta from '../../components/Cubierta.astro';
+import BotonPlay from '../../components/BotonPlay.astro';
+import BotonFavorito from '../../components/BotonFavorito.astro';
+import BotonCompartir from '../../components/BotonCompartir.astro';
+import Video from '../../components/Video.astro';
+import TarjetaCantico from '../../components/TarjetaCantico.astro';
+import { canticosOrdenados } from '../../lib/datos';
+import { libroPorSlug } from '../../lib/biblia';
+import { fechaES } from '../../lib/util';
+import sitio from '../../config/sitio.json';
+
+export async function getStaticPaths() {
+  const todos = await canticosOrdenados();
+  return todos.map((c) => ({ params: { slug: c.id }, props: { c, todos } }));
+}
+const { c, todos } = Astro.props;
+const d = c.data;
+const { Content } = await render(c);
+const libro = libroPorSlug(d.libro);
+const urlPasaje = libro ? `/biblia/${libro.slug}/${d.capitulo ?? 1}/` : null;
+const relacionados = todos.filter((x) => x.id !== c.id && (x.data.libro === d.libro || x.data.temas.some((t) => d.temas.includes(t)))).slice(0, 4);
+const url = new URL(`/musica/${c.id}/`, Astro.site).href;
+const jsonld = [{
+  '@context': 'https://schema.org', '@type': 'MusicRecording', name: d.titulo, url,
+  byArtist: { '@type': 'MusicGroup', name: sitio.nombre }, datePublished: d.fecha.toISOString().slice(0, 10),
+  description: d.descripcion, inLanguage: 'es', genre: 'Música cristiana',
+  ...(d.portada ? { image: new URL(d.portada, Astro.site).href } : {}),
+  ...(d.audio ? { audio: { '@type': 'AudioObject', contentUrl: new URL(d.audio, Astro.site).href, encodingFormat: 'audio/mpeg' } } : {}),
+}];
+---
+<Base titulo={d.titulo} descripcion={`${d.descripcion} ${d.referencia} (RVR1909).`} imagen={d.portada} tipo="music.song" jsonld={d.demo ? [] : jsonld} sinIndice={d.demo}>
+  <header class="cab-pagina"><div class="contenedor">
+    <div class="migas"><a href="/">Inicio</a> › <a href="/musica/">Cánticos</a> › {d.titulo}</div>
+  </div></header>
+  <section class="banda"><div class="contenedor ficha">
+    <Cubierta c={d} grande />
+    <div>
+      <span class="ref" style="font-size:20px">{d.referencia} (RVR1909)</span>
+      <h1 style="margin-top:.2em">{d.titulo}</h1>
+      {d.demo && <p><span class="etiqueta-demo">Demostración — reemplace este ejemplo por su cántico</span></p>}
+      <p class="sub">{d.descripcion}</p>
+      <div class="temas">{d.temas.map((t) => <a class="tema" href={`/musica/?tema=${encodeURIComponent(t)}`}>{t}</a>)}</div>
+      <div class="fila-acciones">
+        {d.audio ? <><BotonPlay id={c.id} titulo={d.titulo} /><span>Escuchar{d.duracion && ` · ${d.duracion}`}</span></> : <span class="sin-audio">El audio de este cántico estará disponible próximamente.</span>}
+        <BotonFavorito tipo="cantico" id={c.id} titulo={d.titulo} url={`/musica/${c.id}/`} />
+        <BotonCompartir titulo={d.titulo} url={`/musica/${c.id}/`} />
+        {urlPasaje && <a class="btn btn-borde" href={urlPasaje}>Leer {libro!.libro} {d.capitulo ?? 1}</a>}
+      </div>
+      <div class="prosa"><Content /></div>
+      {d.youtube && <div style="margin-top:26px;max-width:640px"><Video v={{ id: d.youtube, titulo: d.titulo, referencia: d.referencia }} /></div>}
+      <p class="creditos">{sitio.creditosMusicales}<br /><strong>{sitio.firma}</strong> · Publicado el {fechaES(d.fecha)}</p>
+    </div>
+  </div></section>
+  {relacionados.length > 0 && <section class="banda alt"><div class="contenedor"><h2>Cánticos relacionados</h2><div class="rejilla">{relacionados.map((x) => <TarjetaCantico c={x.data} id={x.id} />)}</div></div></section>}
+</Base>

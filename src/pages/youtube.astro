@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import Video from '../components/Video.astro';
+import Ic from '../components/Ic.astro';
+import sitio from '../config/sitio.json';
+const yt = sitio.youtube;
+const videos = yt.videos as any[]; const listas = yt.listas as any[];
+const subs = yt.urlCanal ? (yt.urlCanal.includes('?') ? yt.urlCanal + '&sub_confirmation=1' : yt.urlCanal.replace(/\/$/, '') + '?sub_confirmation=1') : '';
+const jsonld = videos.filter((v) => v.fecha).map((v) => ({
+  '@context': 'https://schema.org', '@type': 'VideoObject', name: v.titulo, description: v.descripcion || v.titulo,
+  thumbnailUrl: `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`, uploadDate: v.fecha, embedUrl: `https://www.youtube-nocookie.com/embed/${v.id}`,
+  contentUrl: `https://www.youtube.com/watch?v=${v.id}`,
+}));
+---
+<Base titulo={`Canal ${yt.nombreCanal}`} descripcion={`Videos de cánticos bíblicos y enseñanzas del canal ${yt.nombreCanal}, con referencias de la Santa Biblia Reina-Valera 1909 (RVR1909).`} jsonld={jsonld}>
+  <header class="cab-pagina"><div class="contenedor">
+    <div class="migas"><a href="/">Inicio</a> › YouTube</div>
+    <h1>Canal {yt.nombreCanal}</h1>
+    <p class="sub">Cánticos bíblicos y enseñanza de la Palabra. Los videos se reproducen aquí mismo cuando YouTube permite su inserción.</p>
+    <div class="fila-acciones">
+      {yt.urlCanal
+        ? <><a class="btn btn-oro" href={subs} target="_blank" rel="noopener"><Ic n="youtube" /> Suscribirse</a><a class="btn btn-borde" href={yt.urlCanal} target="_blank" rel="noopener">Abrir el canal <Ic n="externo" /></a></>
+        : <span class="btn btn-borde" aria-disabled="true">Enlace del canal pendiente de configurar</span>}
+    </div>
+  </div></header>
+
+  <section class="banda"><div class="contenedor">
+    <h2>Videos</h2>
+    {videos.length
+      ? <div class="rejilla">{videos.map((v) => <Video v={v} />)}</div>
+      : <div class="aviso info">
+          <h3>Todavía no hay videos conectados</h3>
+          <p>Este sitio nunca muestra videos ni estadísticas inventadas. Para agregar un video, abra <code>src/config/sitio.json</code> y añada a la lista <code>videos</code> su identificador real (las 11 letras después de <code>v=</code> en el enlace de YouTube), con su título.</p>
+          <p style="margin:0">Ejemplo de formato: <code>{'{ "id": "ABCDEFGHIJK", "titulo": "…", "fecha": "2026-11-19", "referencia": "Salmos 23" }'}</code></p>
+        </div>}
+  </div></section>
+
+  <section class="banda alt"><div class="contenedor">
+    <h2>Listas de reproducción</h2>
+    {listas.length
+      ? <div class="rejilla">{listas.map((l) => <Video v={l} lista />)}</div>
+      : <div class="aviso info"><h3>Sin listas configuradas</h3><p style="margin:0">Agregue el identificador de cada lista (empieza con <code>PL</code>, aparece después de <code>list=</code>) en la sección <code>listas</code> del mismo archivo.</p></div>}
+  </div></section>
+
+  <section class="banda"><div class="contenedor prosa">
+    <h2>¿Por qué no se cargan los videos automáticamente?</h2>
+    <p>Mostrar los videos más recientes de forma automática requiere la <strong>API de datos de YouTube</strong>, que necesita una clave de Google y un pequeño servidor o una tarea programada. Es gratuita dentro de su cuota, pero añade complejidad.</p>
+    <p>La alternativa sin API, que usa este sitio, es pegar el identificador de cada video en un archivo de configuración. Es gratis, rápida, segura y no depende de ningún servicio externo. Los videos se cargan solo cuando el visitante toca Reproducir, para que la página abra rápido incluso con conexiones lentas.</p>
+  </div></section>
+</Base>

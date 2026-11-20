@@ -1,0 +1,13 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { novedadesOrdenadas } from '../lib/datos';
+import { fechaES } from '../lib/util';
+const n = await Promise.all((await novedadesOrdenadas()).map(async (x) => ({ x, C: (await render(x)).Content })));
+---
+<Base titulo="Novedades" descripcion="Últimas noticias, lanzamientos y proyectos de Salud y Vida Records.">
+  <header class="cab-pagina"><div class="contenedor"><div class="migas"><a href="/">Inicio</a> › Novedades</div><h1>Novedades</h1><p class="sub">Lanzamientos, proyectos y noticias del ministerio.</p></div></header>
+  <section class="banda"><div class="contenedor" style="max-width:860px">
+    {n.length ? <ul class="linea-tiempo">{n.map(({ x, C }) => <li><time datetime={x.data.fecha.toISOString()}>{fechaES(x.data.fecha)}</time><h2 style="font-size:30px;margin:.2em 0 .3em">{x.data.titulo} {x.data.demo && <span class="etiqueta-demo">Ejemplo</span>}</h2><div class="prosa"><C /></div>{x.data.enlace && <a href={x.data.enlace}>Ver más</a>}</li>)}</ul> : <div class="vacio"><h3>Sin novedades por ahora</h3></div>}
+  </div></section>
+</Base>

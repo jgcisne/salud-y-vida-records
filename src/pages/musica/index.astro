@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+import TarjetaCantico from '../../components/TarjetaCantico.astro';
+import { canticosOrdenados } from '../../lib/datos';
+import { libros, nombreLibro } from '../../lib/biblia';
+const c = await canticosOrdenados();
+const librosUsados = libros.filter((l) => c.some((x) => x.data.libro === l.slug));
+const temas = [...new Set(c.flatMap((x) => x.data.temas))].sort((a, b) => a.localeCompare(b, 'es'));
+---
+<Base titulo="Biblioteca musical" descripcion="Catálogo de cánticos bíblicos de Salud y Vida Records, organizados por libro de la Biblia y tema. Referencias de la Santa Biblia Reina-Valera 1909 (RVR1909).">
+  <header class="cab-pagina"><div class="contenedor">
+    <div class="migas"><a href="/">Inicio</a> › Cánticos</div>
+    <h1>Biblioteca musical</h1>
+    <p class="sub">Cánticos bíblicos para escuchar, aprender y compartir. Filtre por libro de la Biblia o por tema.</p>
+  </div></header>
+  <section class="banda"><div class="contenedor">
+    <div class="filtros" role="search">
+      <div><label for="f-texto">Buscar un cántico</label><input id="f-texto" type="search" placeholder="Título, pasaje o palabra…" autocomplete="off" /></div>
+      <div><label for="f-libro">Libro de la Biblia</label><select id="f-libro"><option value="">Todos los libros</option>{librosUsados.map((l) => <option value={l.slug}>{l.libro}</option>)}</select></div>
+      <div><label for="f-tema">Tema</label><select id="f-tema"><option value="">Todos los temas</option>{temas.map((t) => <option value={t}>{t}</option>)}</select></div>
+    </div>
+    <p class="conteo" id="conteo" aria-live="polite">{c.length} cánticos</p>
+    <div class="rejilla" id="lista-canticos">{c.map((x) => <TarjetaCantico c={x.data} id={x.id} />)}</div>
+    <div class="vacio" id="sin-resultados" hidden><h3>No encontramos cánticos con esos filtros</h3><p>Pruebe con otra palabra o elija «Todos los libros».</p></div>
+    <p style="text-align:center;margin-top:28px"><button class="btn btn-borde" id="ver-mas" type="button" hidden>Mostrar más cánticos</button></p>
+  </div></section>
+</Base>

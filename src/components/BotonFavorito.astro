@@ -1,0 +1,5 @@
+---
+import Ic from './Ic.astro';
+const { tipo, id, titulo, url } = Astro.props;
+---
+<button class="ic-btn" type="button" data-fav={`${tipo}:${id}`} data-fav-titulo={titulo} data-fav-url={url} aria-pressed="false" aria-label={`Guardar ${titulo} en favoritos`}><Ic n="corazon" /></button>

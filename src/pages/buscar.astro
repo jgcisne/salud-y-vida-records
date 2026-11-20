@@ -1,0 +1,10 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base titulo="Buscar" descripcion="Busque cánticos, videos, reflexiones y pasajes de la Santa Biblia Reina-Valera 1909 (RVR1909).">
+  <header class="cab-pagina"><div class="contenedor"><div class="migas"><a href="/">Inicio</a> › Buscar</div><h1>Buscar</h1><p class="sub">Cánticos, videos, reflexiones y pasajes bíblicos en un solo lugar.</p>
+    <div role="search" style="max-width:720px;margin-top:16px"><label for="q">¿Qué desea encontrar?</label><input id="q" type="search" placeholder="Ej.: pastor, Juan 3:16, Salmos 23" autocomplete="off" /></div>
+    <p style="margin-top:14px"><button class="btn btn-borde" type="button" id="buscar-biblia">Buscar también palabras dentro de toda la Biblia (descarga ~1,5 MB)</button></p>
+  </div></header>
+  <section class="banda" style="padding-top:30px"><div class="contenedor" id="resultados" aria-live="polite"></div></section>
+</Base>

@@ -1,0 +1,46 @@
+{
+  "_ayuda": "Este es el archivo de configuración principal. Cambie solo el texto entre comillas. Deje \"\" (vacío) lo que todavía no tenga: el sitio mostrará un aviso honesto en lugar de inventar datos.",
+
+  "nombre": "Salud y Vida Records",
+  "lema": "TODO SE TRATA DE JESÚS",
+  "fundador": "Siervo del Señor Juan Cisneros",
+  "firma": "© Salud y Vida Records — Siervo del Señor Juan Cisneros",
+  "dominio": "https://saludyvidarecords.pages.dev",
+  "descripcion": "Cánticos bíblicos, reflexiones y estudios de la Palabra de Dios según la Santa Biblia Reina-Valera 1909 (RVR1909). Todo se trata de Jesús.",
+
+  "versiculoDestacado": { "libro": "colosenses", "capitulo": 1, "versiculo": 28 },
+
+  "youtube": {
+    "_ayuda": "Pegue aquí el enlace oficial de su canal, por ejemplo https://www.youtube.com/@SuCanal. Los videos se agregan con su ID (las 11 letras después de v= en el enlace del video).",
+    "nombreCanal": "El Mesías — Salud y Vida Records",
+    "urlCanal": "",
+    "videos": [],
+    "listas": []
+  },
+
+  "_ejemploVideo": { "id": "ABCDEFGHIJK", "titulo": "Título exacto del video", "fecha": "2026-11-19", "descripcion": "Descripción breve", "referencia": "Salmos 23" },
+  "_ejemploLista": { "id": "PLxxxxxxxxxxxxxxxx", "titulo": "Nombre de la lista", "descripcion": "Descripción breve" },
+
+  "app": {
+    "_ayuda": "Cuando Apple apruebe su aplicación, pegue aquí el enlace oficial de la App Store. Mientras esté vacío, el sitio muestra PRÓXIMAMENTE.",
+    "nombre": "Salud y Vida Records",
+    "urlAppStore": "",
+    "descripcion": "Una aplicación musical para escuchar cánticos bíblicos, meditar en las Escrituras (RVR1909) y llevar la Palabra de Dios en el bolsillo."
+  },
+
+  "contacto": {
+    "_ayuda": "No se muestra nada que esté vacío. Para el formulario, cree una clave gratuita en https://web3forms.com y péguela en clave_web3forms.",
+    "correo": "",
+    "whatsapp": "",
+    "clave_web3forms": ""
+  },
+
+  "redes": {
+    "facebook": "",
+    "instagram": "",
+    "tiktok": "",
+    "spotify": ""
+  },
+
+  "creditosMusicales": "Música producida por Salud y Vida Records con herramientas de inteligencia artificial de Suno, mediante una suscripción comercial pagada. Letras basadas en la Santa Biblia Reina-Valera 1909 (RVR1909), de dominio público."
+}

@@ -1,0 +1,7 @@
+---
+import Ic from './Ic.astro';
+const { id, titulo } = Astro.props;
+---
+<button class="boton-play" type="button" data-play={id} aria-pressed="false" aria-label={`Reproducir ${titulo}`}>
+  <span class="i-play"><Ic n="play" /></span><span class="i-pausa"><Ic n="pausa" /></span>
+</button>

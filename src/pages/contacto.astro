@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import Ic from '../components/Ic.astro';
+import sitio from '../config/sitio.json';
+const c = sitio.contacto; const r = sitio.redes;
+const medios = [
+  c.correo && { t: 'Correo electrónico', v: c.correo, h: `mailto:${c.correo}` },
+  c.whatsapp && { t: 'WhatsApp', v: c.whatsapp, h: `https://wa.me/${c.whatsapp.replace(/\D/g, '')}` },
+  sitio.youtube.urlCanal && { t: 'YouTube', v: sitio.youtube.nombreCanal, h: sitio.youtube.urlCanal },
+  r.facebook && { t: 'Facebook', v: 'Facebook', h: r.facebook }, r.instagram && { t: 'Instagram', v: 'Instagram', h: r.instagram },
+  r.tiktok && { t: 'TikTok', v: 'TikTok', h: r.tiktok }, r.spotify && { t: 'Spotify', v: 'Spotify', h: r.spotify },
+].filter(Boolean) as { t: string; v: string; h: string }[];
+const formularioActivo = !!c.clave_web3forms;
+---
+<Base titulo="Contacto" descripcion="Escriba a Salud y Vida Records: oración, testimonios, preguntas o colaboración.">
+  <header class="cab-pagina"><div class="contenedor"><div class="migas"><a href="/">Inicio</a> › Contacto</div><h1>Contacto</h1><p class="sub">Nos alegrará leer su testimonio, su petición de oración o su pregunta.</p></div></header>
+  <section class="banda"><div class="contenedor dos" style="align-items:start">
+    <div>
+      <h2>Envíenos un mensaje</h2>
+      {!formularioActivo && <div class="aviso info" style="margin-bottom:20px"><p style="margin:0">El formulario todavía no está conectado a un servicio de envío, por eso el botón está desactivado. Se activa al pegar una clave gratuita de Web3Forms en <code>src/config/sitio.json</code>.</p></div>}
+      <form class="formulario" id="form-contacto" novalidate={false}>
+        <input type="hidden" name="access_key" value={c.clave_web3forms} />
+        <input type="hidden" name="subject" value="Nuevo mensaje desde el sitio de Salud y Vida Records" />
+        <div class="oculto-humano" aria-hidden="true"><label for="botcheck">No llene este campo</label><input id="botcheck" type="checkbox" name="botcheck" tabindex="-1" /></div>
+        <div><label for="nombre">Su nombre</label><input id="nombre" name="name" required autocomplete="name" /></div>
+        <div><label for="email">Su correo electrónico</label><input id="email" name="email" type="email" required autocomplete="email" /></div>
+        <div><label for="motivo">Motivo</label><select id="motivo" name="motivo"><option>Petición de oración</option><option>Testimonio</option><option>Pregunta</option><option>Colaboración</option><option>Otro</option></select></div>
+        <div><label for="mensaje">Mensaje</label><textarea id="mensaje" name="message" required></textarea></div>
+        <label style="font-weight:400;display:flex;gap:10px;align-items:flex-start"><input type="checkbox" required style="width:24px;min-height:24px;margin-top:4px;flex:none" /> Acepto que mis datos se usen solo para responder a mi mensaje.</label>
+        <button class="btn btn-oro" type="submit" disabled={!formularioActivo}><Ic n="correo" /> Enviar mensaje</button>
+        <div id="estado-form" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+    <div>
+      <h2>Otros medios</h2>
+      {medios.length ? <ul class="resultados">{medios.map((m) => <li><a href={m.h} target="_blank" rel="noopener"><span class="tipo">{m.t}</span><strong>{m.v}</strong></a></li>)}</ul>
+        : <div class="vacio"><p style="margin:0">Los medios de contacto se publicarán aquí cuando se configuren. No mostramos teléfonos, direcciones ni correos que no sean oficiales.</p></div>}
+      <div class="aviso" id="privacidad" style="margin-top:28px">
+        <h3>Aviso de privacidad</h3>
+        <p class="privacidad">Este sitio no usa cuentas de usuario ni cookies de publicidad. Sus favoritos, el tamaño de letra y el modo claro u oscuro se guardan solo en su propio dispositivo. Si envía el formulario, su nombre, correo y mensaje se transmiten a través del servicio Web3Forms únicamente para que podamos responderle; no los vendemos ni los compartimos. Los videos de YouTube se cargan desde youtube-nocookie.com solo cuando usted toca Reproducir. Puede pedir que borremos sus datos escribiéndonos.</p>
+      </div>
+    </div>
+  </div></section>
+</Base>

@@ -1,0 +1,5 @@
+---
+import Ic from './Ic.astro';
+const { titulo, url, texto = '' } = Astro.props;
+---
+<button class="ic-btn" type="button" data-compartir={url} data-titulo={titulo} data-texto={texto} aria-label={`Compartir ${titulo}`}><Ic n="compartir" /></button>

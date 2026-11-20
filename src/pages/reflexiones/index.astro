@@ -1,0 +1,13 @@
+---
+import Base from '../../layouts/Base.astro';
+import { reflexionesOrdenadas } from '../../lib/datos';
+import { fechaES } from '../../lib/util';
+const r = await reflexionesOrdenadas();
+---
+<Base titulo="Reflexiones y estudios" descripcion="Reflexiones bíblicas y ensayos cristocéntricos de Salud y Vida Records basados en la Santa Biblia Reina-Valera 1909 (RVR1909).">
+  <header class="cab-pagina"><div class="contenedor"><div class="migas"><a href="/">Inicio</a> › Reflexiones</div><h1>Reflexiones y estudios</h1><p class="sub">Meditaciones en las Escrituras con un mismo centro: Cristo Jesús.</p></div></header>
+  <section class="banda"><div class="contenedor">
+    {r.length ? <ul class="resultados">{r.map((x) => <li><a href={`/reflexiones/${x.id}/`}><span class="tipo">{x.data.referencia} (RVR1909) · {fechaES(x.data.fecha)}</span><strong>{x.data.titulo} {x.data.demo && <span class="etiqueta-demo">Ejemplo</span>}</strong><span class="frag">{x.data.resumen}</span></a></li>)}</ul>
+      : <div class="vacio"><h3>Pronto publicaremos reflexiones</h3></div>}
+  </div></section>
+</Base>

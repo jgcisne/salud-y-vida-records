@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import Icono from '../components/Icono.astro';
+import sitio from '../config/sitio.json';
+import { versiculo } from '../lib/biblia';
+const v = versiculo('colosenses', 1, 28);
+---
+<Base titulo="Sobre nosotros" descripcion="Salud y Vida Records existe para proclamar la Palabra de Dios mediante cánticos, reflexiones y herramientas digitales.">
+  <header class="cab-pagina"><div class="contenedor"><div class="migas"><a href="/">Inicio</a> › Nosotros</div><h1>Sobre Salud y Vida Records</h1><p class="sub" style="font-family:var(--f-titulo);font-style:italic;font-size:28px">{sitio.lema}</p></div></header>
+  <section class="banda"><div class="contenedor dos">
+    <div class="prosa">
+      <h2>Nuestra visión</h2>
+      <p>Salud y Vida Records existe para proclamar la Palabra de Dios mediante cánticos, reflexiones y herramientas digitales que ayuden a las personas a conocer, recordar y meditar en las Escrituras.</p>
+      <p>No buscamos nuestra propia gloria. Cada canto, cada estudio y cada herramienta quiere señalar a una sola Persona: el Señor Jesucristo. Por eso usamos el texto de la Santa Biblia Reina-Valera 1909 (RVR1909) y procuramos ser fieles a lo que la Escritura dice.</p>
+      <h2>Quién está detrás</h2>
+      <p>El proyecto fue fundado y es producido por el <strong>{sitio.fundador}</strong>, quien sirve también a través del canal de YouTube {sitio.youtube.nombreCanal}.</p>
+      <h2>Créditos musicales</h2>
+      <p>{sitio.creditosMusicales}</p>
+      {v && <blockquote>«{v.texto}» <br /><small>{v.referencia} (RVR1909)</small></blockquote>}
+    </div>
+    <div style="text-align:center"><div style="width:220px;margin:0 auto"><Icono size={220} title="Icono de Salud y Vida Records" /></div><p style="margin-top:18px;color:var(--ink-2)">El icono: un sol naciente, una cruz de luz y una onda sonora. La Palabra que ilumina, cantada.</p></div>
+  </div></section>
+</Base>

@@ -1,0 +1,24 @@
+---
+import Cubierta from './Cubierta.astro';
+import BotonPlay from './BotonPlay.astro';
+import BotonFavorito from './BotonFavorito.astro';
+import BotonCompartir from './BotonCompartir.astro';
+import Ic from './Ic.astro';
+const { c, id } = Astro.props;
+const url = `/musica/${id}/`;
+---
+<article class="tarjeta" data-libro={c.libro} data-temas={c.temas.join('|')} data-buscar={`${c.titulo} ${c.referencia} ${c.temas.join(' ')} ${c.descripcion}`}>
+  <Cubierta c={c} />
+  <div class="cuerpo">
+    <span class="ref">{c.referencia} (RVR1909)</span>
+    <h3><a href={url}>{c.titulo}</a></h3>
+    {c.demo && <span><span class="etiqueta-demo">Demostración</span></span>}
+    <p class="desc">{c.descripcion}</p>
+    <div class="controles">
+      {c.audio ? <BotonPlay id={id} titulo={c.titulo} /> : <span class="sin-audio">Audio próximamente</span>}
+      <BotonFavorito tipo="cantico" id={id} titulo={c.titulo} url={url} />
+      <BotonCompartir titulo={c.titulo} url={url} />
+      {c.youtube && <a class="ic-btn" href={`https://www.youtube.com/watch?v=${c.youtube}`} target="_blank" rel="noopener" aria-label={`Ver ${c.titulo} en YouTube (se abre en otra pestaña)`}><Ic n="youtube" /></a>}
+    </div>
+  </div>
+</article>

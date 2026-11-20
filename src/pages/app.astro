@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import Icono from '../components/Icono.astro';
+import Ic from '../components/Ic.astro';
+import sitio from '../config/sitio.json';
+const a = sitio.app; const lista = !!a.urlAppStore;
+---
+<Base titulo="Aplicación para iPhone" descripcion={`${a.nombre}: ${a.descripcion}`}>
+  <section class="banda"><div class="contenedor dos">
+    <div>
+      <div class="migas"><a href="/">Inicio</a> › Aplicación</div>
+      <h1>La aplicación {a.nombre}</h1>
+      <p class="sub">{a.descripcion}</p>
+      <ul style="font-size:19px;color:var(--ink-2);padding-left:1.2em"><li>Cánticos bíblicos para escuchar en cualquier lugar</li><li>Versículos de la Santa Biblia Reina-Valera 1909 (RVR1909)</li><li>Diseñada para iPhone y iPad</li></ul>
+      <div class="fila-acciones">
+        {lista
+          ? <a class="btn btn-oro" href={a.urlAppStore} target="_blank" rel="noopener"><Ic n="apple" /> DESCARGAR EN APP STORE</a>
+          : <><span class="sello">PRÓXIMAMENTE</span><span style="color:var(--ink-2)">La aplicación todavía no está publicada en la App Store. El botón de descarga aparecerá aquí cuando Apple la apruebe.</span></>}
+      </div>
+    </div>
+    <div class="telefono" aria-hidden="true"><div class="pantalla"><div><div style="width:84px;margin:0 auto 18px"><Icono size={84} /></div><div style="font-family:var(--f-logo);font-weight:700;letter-spacing:.1em;font-size:20px">SALUD Y VIDA</div><div style="letter-spacing:.4em;color:var(--oro);font-size:13px;margin-top:6px">RECORDS</div><p style="font-family:var(--f-titulo);font-style:italic;font-size:22px;margin-top:26px">{sitio.lema}</p></div></div></div>
+  </div></section>
+</Base>

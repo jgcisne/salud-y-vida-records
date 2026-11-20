@@ -1,0 +1,57 @@
+---
+import Base from '../../../layouts/Base.astro';
+import TarjetaCantico from '../../../components/TarjetaCantico.astro';
+import Ic from '../../../components/Ic.astro';
+import { libros } from '../../../lib/biblia';
+import { canticosOrdenados, reflexionesOrdenadas } from '../../../lib/datos';
+export async function getStaticPaths() {
+  const paths = [];
+  for (const [i, l] of libros.entries()) for (let c = 1; c <= l.capitulos.length; c++) {
+    const prev = c > 1 ? { url: `/biblia/${l.slug}/${c - 1}/`, t: `${l.libro} ${c - 1}` } : i > 0 ? { url: `/biblia/${libros[i - 1].slug}/${libros[i - 1].capitulos.length}/`, t: `${libros[i - 1].libro} ${libros[i - 1].capitulos.length}` } : null;
+    const next = c < l.capitulos.length ? { url: `/biblia/${l.slug}/${c + 1}/`, t: `${l.libro} ${c + 1}` } : i < libros.length - 1 ? { url: `/biblia/${libros[i + 1].slug}/1/`, t: `${libros[i + 1].libro} 1` } : null;
+    paths.push({ params: { libro: l.slug, capitulo: String(c) }, props: { l, c, prev, next } });
+  }
+  return paths;
+}
+const { l, c, prev, next } = Astro.props;
+const versos = l.capitulos[c - 1];
+const canticos = (await canticosOrdenados()).filter((x) => x.data.libro === l.slug && (!x.data.capitulo || x.data.capitulo === c));
+const reflexiones = (await reflexionesOrdenadas()).filter((x) => x.data.libro === l.slug && (!x.data.capitulo || x.data.capitulo === c));
+const ref = `${l.libro} ${c}`;
+---
+<Base titulo={`${ref} (RVR1909)`} descripcion={`${ref} — Santa Biblia Reina-Valera 1909. ${versos[0][1].slice(0, 120)}…`}>
+  <header class="cab-pagina"><div class="contenedor">
+    <div class="migas"><a href="/">Inicio</a> › <a href="/biblia/">Biblia</a> › <a href={`/biblia/${l.slug}/`}>{l.libro}</a> › Capítulo {c}</div>
+    <h1>{ref} <span style="font-size:.5em;color:var(--acento-texto)">RVR1909</span></h1>
+    <div class="fila-acciones" style="margin:10px 0 0">
+      <span class="tamano"><span>Tamaño de letra:</span>
+        <button class="ic-btn" type="button" data-letra="-2" aria-label="Letra más pequeña">A−</button>
+        <button class="ic-btn" type="button" data-letra="2" aria-label="Letra más grande">A+</button></span>
+    </div>
+  </div></header>
+  <section class="banda"><div class="contenedor">
+    <article class="lectura" aria-label={`Texto de ${ref}`}>
+      {versos.map(([n, t]) => {
+        const r = `${ref}:${n}`, u = `/biblia/${l.slug}/${c}/#v${n}`;
+        return <p class="vers" id={`v${n}`}><span class="n">{n}</span>{t}
+          <span class="acc">
+            <button type="button" data-copiar={`«${t}» ${r} (RVR1909)`}>Copiar</button>
+            <button type="button" data-compartir={u} data-titulo={`${r} (RVR1909)`} data-texto={`«${t}» ${r} (RVR1909)`}>Compartir</button>
+            <button type="button" data-fav={`versiculo:${l.slug}-${c}-${n}`} data-fav-titulo={`${r} (RVR1909)`} data-fav-url={u} aria-pressed="false">Favorito</button>
+          </span></p>;
+      })}
+      <nav class="paginador" aria-label="Capítulos">
+        {prev ? <a class="btn btn-borde" href={prev.url} rel="prev"><Ic n="ant" /> {prev.t}</a> : <span></span>}
+        <a class="btn btn-borde" href={`/biblia/${l.slug}/`}>Capítulos</a>
+        {next ? <a class="btn btn-borde" href={next.url} rel="next">{next.t} <Ic n="sig" /></a> : <span></span>}
+      </nav>
+      <p class="fuente-biblia">Santa Biblia Reina-Valera 1909 (RVR1909), dominio público.</p>
+    </article>
+  </div></section>
+  {(canticos.length > 0 || reflexiones.length > 0) && (
+    <section class="banda alt"><div class="contenedor">
+      {canticos.length > 0 && <><h2>Cánticos de este pasaje</h2><div class="rejilla" style="margin-bottom:30px">{canticos.map((x) => <TarjetaCantico c={x.data} id={x.id} />)}</div></>}
+      {reflexiones.length > 0 && <><h2>Reflexiones</h2><ul class="resultados">{reflexiones.map((r) => <li><a href={`/reflexiones/${r.id}/`}><span class="tipo">Reflexión</span><strong>{r.data.titulo}</strong><span class="frag">{r.data.resumen}</span></a></li>)}</ul></>}
+    </div></section>
+  )}
+</Base>

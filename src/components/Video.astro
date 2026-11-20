@@ -1,0 +1,28 @@
+---
+import Ic from './Ic.astro';
+import BotonCompartir from './BotonCompartir.astro';
+import BotonFavorito from './BotonFavorito.astro';
+import { fechaES } from '../lib/util';
+const { v, lista = false } = Astro.props;
+const url = lista ? `https://www.youtube.com/playlist?list=${v.id}` : `https://www.youtube.com/watch?v=${v.id}`;
+---
+<article class="tarjeta" id={`${lista ? 'lista' : 'video'}-${v.id}`}>
+  <div class="video">
+    <button class="lite" type="button" data-video={lista ? '' : v.id} data-lista={lista ? v.id : undefined} aria-label={`Reproducir ${lista ? 'la lista' : 'el video'}: ${v.titulo}`}>
+      {!lista && <img src={`https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`} alt="" loading="lazy" width="480" height="360" />}
+      {lista && <span style="position:absolute;inset:0;background:linear-gradient(160deg,#0b1a3f,#3b4f86)"></span>}
+      <span class="yt-play"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></span>
+    </button>
+  </div>
+  <div class="cuerpo">
+    {v.referencia && <span class="ref">{v.referencia} (RVR1909)</span>}
+    <h3 style="font-size:23px">{v.titulo}</h3>
+    {v.fecha && <span class="sin-audio">{fechaES(new Date(v.fecha))}</span>}
+    {v.descripcion && <p class="desc">{v.descripcion}</p>}
+    <div class="controles">
+      <a class="btn btn-borde" style="min-height:48px;padding:8px 16px;font-size:16px" href={url} target="_blank" rel="noopener">Abrir en YouTube <Ic n="externo" /></a>
+      {!lista && <BotonFavorito tipo="video" id={v.id} titulo={v.titulo} url={`/youtube/#video-${v.id}`} />}
+      <BotonCompartir titulo={v.titulo} url={url} />
+    </div>
+  </div>
+</article>

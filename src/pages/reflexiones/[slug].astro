@@ -1,0 +1,23 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import BotonCompartir from '../../components/BotonCompartir.astro';
+import BotonFavorito from '../../components/BotonFavorito.astro';
+import { reflexionesOrdenadas } from '../../lib/datos';
+import { libroPorSlug } from '../../lib/biblia';
+import { fechaES } from '../../lib/util';
+import sitio from '../../config/sitio.json';
+export async function getStaticPaths() { return (await reflexionesOrdenadas()).map((r) => ({ params: { slug: r.id }, props: { r } })); }
+const { r } = Astro.props; const d = r.data;
+const { Content } = await render(r);
+const l = libroPorSlug(d.libro);
+const jsonld = [{ '@context': 'https://schema.org', '@type': 'Article', headline: d.titulo, description: d.resumen, datePublished: d.fecha.toISOString().slice(0, 10), inLanguage: 'es', author: { '@type': 'Person', name: 'Juan Cisneros' }, publisher: { '@type': 'Organization', name: sitio.nombre } }];
+---
+<Base titulo={d.titulo} descripcion={d.resumen} tipo="article" jsonld={d.demo ? [] : jsonld} sinIndice={d.demo}>
+  <header class="cab-pagina"><div class="contenedor"><div class="migas"><a href="/">Inicio</a> › <a href="/reflexiones/">Reflexiones</a></div>
+    <span class="ref">{d.referencia} (RVR1909)</span><h1 style="margin-top:.2em">{d.titulo}</h1>
+    <p class="sub">{fechaES(d.fecha)} · {sitio.fundador}</p>
+    <div class="fila-acciones"><BotonFavorito tipo="reflexion" id={r.id} titulo={d.titulo} url={`/reflexiones/${r.id}/`} /><BotonCompartir titulo={d.titulo} url={`/reflexiones/${r.id}/`} />{l && <a class="btn btn-borde" href={`/biblia/${l.slug}/${d.capitulo ?? 1}/`}>Leer {l.libro} {d.capitulo ?? 1}</a>}</div>
+  </div></header>
+  <article class="banda"><div class="contenedor prosa" style="margin-inline:auto"><Content /><p class="creditos"><strong>{sitio.firma}</strong></p></div></article>
+</Base>

@@ -1,0 +1,22 @@
+---
+import Base from '../../layouts/Base.astro';
+import { libros } from '../../lib/biblia';
+const at = libros.filter((l) => l.testamento === 'AT'), nt = libros.filter((l) => l.testamento === 'NT');
+const total = libros.reduce((s, l) => s + l.capitulos.reduce((a, c) => a + c.length, 0), 0);
+---
+<Base titulo="Santa Biblia Reina-Valera 1909 (RVR1909)" descripcion="Lea la Santa Biblia Reina-Valera 1909 (RVR1909) completa: 66 libros, capítulos y versículos, con búsqueda por referencia y cánticos relacionados.">
+  <header class="cab-pagina"><div class="contenedor">
+    <div class="migas"><a href="/">Inicio</a> › Biblia</div>
+    <h1>Santa Biblia Reina-Valera 1909</h1>
+    <p class="sub">Los 66 libros, {libros.reduce((s, l) => s + l.capitulos.length, 0).toLocaleString('es')} capítulos y {total.toLocaleString('es')} versículos (RVR1909), de dominio público. Toque un versículo para copiarlo o compartirlo.</p>
+    <form action="/buscar/" method="get" role="search" style="max-width:560px;margin-top:18px">
+      <label for="ref-b">Ir a una referencia o buscar</label>
+      <div style="display:flex;gap:10px"><input id="ref-b" name="q" type="search" placeholder="Ej.: Juan 3:16 o Salmos 23" /><button class="btn btn-oro" type="submit">Buscar</button></div>
+    </form>
+  </div></header>
+  <section class="banda"><div class="contenedor">
+    <div class="testamento"><h2>Antiguo Testamento</h2><div class="libros">{at.map((l) => <a href={`/biblia/${l.slug}/`}>{l.libro}<span>{l.capitulos.length}</span></a>)}</div></div>
+    <div class="testamento"><h2>Nuevo Testamento</h2><div class="libros">{nt.map((l) => <a href={`/biblia/${l.slug}/`}>{l.libro}<span>{l.capitulos.length}</span></a>)}</div></div>
+    <p class="fuente-biblia">Texto: Santa Biblia Reina-Valera 1909, dominio público. Fuente digital: archivo «spa-rv1909» del proyecto abierto open-bibles (github.com/seven1m/open-bibles).</p>
+  </div></section>
+</Base>

@@ -1,0 +1,9 @@
+---
+import { tono } from '../lib/util';
+const { c, grande = false } = Astro.props; // c = data del cántico
+---
+{c.portada
+  ? <div class="cubierta"><img src={c.portada} alt={`Portada de ${c.titulo}`} loading={grande ? 'eager' : 'lazy'} decoding="async" width="600" height="600" /></div>
+  : <div class="cubierta generada" style={`--h:${tono(c.titulo)}`} role="img" aria-label={`Portada de ${c.titulo}`}>
+      <span class="cub-ref" aria-hidden="true">{c.referencia}<small>RVR1909</small></span>
+    </div>}
