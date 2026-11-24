@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Top 100 Cánticos — Salud y Vida Records</title>
+<meta name="description" content="Los 100 cánticos más escuchados de Salud y Vida Records. La Palabra de Dios hecha canto (RVR1909).">
+<link rel="preconnect" href="https://i.ytimg.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0b1533;--navy2:#132150;--card:#16245a;--gold:#c9a227;--gold2:#f2cf5b;--text:#eef1f8;--muted:#aab3cf}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:radial-gradient(ellipse at top,#22357a 0%,var(--navy) 55%) fixed;color:var(--text);min-height:100vh}
+a{color:inherit;text-decoration:none}
+header{position:sticky;top:0;z-index:10;background:rgba(11,21,51,.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(201,162,39,.25)}
+.bar{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:12px}
+.brand{font-family:Cinzel,serif;font-weight:700;letter-spacing:.06em;line-height:1}
+.brand small{display:block;color:var(--gold);font-size:.7em;letter-spacing:.25em;margin-top:3px}
+.back{border:1px solid rgba(201,162,39,.5);border-radius:999px;padding:8px 16px;font-weight:600;font-size:.9rem;color:var(--gold2)}
+.back:hover{background:rgba(201,162,39,.12)}
+.hero{text-align:center;padding:56px 20px 28px;max-width:820px;margin:auto}
+.hero .tag{color:var(--gold);font-family:Cinzel,serif;letter-spacing:.3em;font-size:.8rem}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,6vw,4rem);margin:10px 0 12px;font-weight:700}
+.hero h1 span{color:var(--gold2)}
+.hero p{color:var(--muted);font-size:1.05rem;line-height:1.6}
+.tools{max-width:1200px;margin:0 auto 24px;padding:0 20px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.search{flex:1;min-width:220px;background:var(--navy2);border:1px solid rgba(201,162,39,.35);border-radius:999px;padding:13px 20px;color:var(--text);font-size:1rem;outline:none}
+.search:focus{border-color:var(--gold2)}
+.count{color:var(--muted);font-size:.9rem}
+.grid{max-width:1200px;margin:0 auto;padding:0 20px 60px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.card{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:16px;overflow:hidden;cursor:pointer;transition:transform .2s,border-color .2s,box-shadow .2s;display:flex;flex-direction:column}
+.card:hover,.card:focus-visible{transform:translateY(-4px);border-color:rgba(242,207,91,.6);box-shadow:0 12px 30px rgba(0,0,0,.35);outline:none}
+.thumb{position:relative;aspect-ratio:16/9;background:#0a1230}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.rank{position:absolute;top:10px;left:10px;background:rgba(11,21,51,.85);border:1px solid var(--gold);color:var(--gold2);font-family:Cinzel,serif;font-weight:700;border-radius:10px;padding:4px 10px;font-size:.95rem}
+.top3 .rank{background:linear-gradient(135deg,#f2cf5b,#c9a227);color:#1b1400;border:none}
+.play{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transition:opacity .2s;background:rgba(0,0,0,.25)}
+.card:hover .play{opacity:1}
+.play span{width:62px;height:62px;border-radius:50%;background:var(--gold2);display:grid;place-items:center;box-shadow:0 6px 20px rgba(0,0,0,.4)}
+.play span::after{content:"";border-left:20px solid #1b1400;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px}
+.info{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.22rem;line-height:1.2}
+.ref{color:var(--gold2);font-size:.85rem}
+.views{color:var(--muted);font-size:.8rem;margin-top:auto}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:40px}
+.modal{position:fixed;inset:0;background:rgba(3,6,18,.88);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+.modal.open{display:flex}
+.player{width:min(960px,100%)}
+.frame{aspect-ratio:16/9;background:#000;border-radius:14px;overflow:hidden}
+.frame iframe{width:100%;height:100%;border:0}
+.ptitle{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+.ptitle h2{font-family:'Cormorant Garamond',serif;font-size:1.5rem}
+.ptitle .ref{font-size:.95rem}
+.btns{display:flex;gap:10px}
+.btn{border-radius:999px;padding:9px 16px;font-weight:600;font-size:.9rem;border:1px solid var(--gold);color:var(--gold2);background:transparent;cursor:pointer}
+.btn.primary{background:var(--gold2);color:#1b1400;border-color:var(--gold2)}
+footer{text-align:center;padding:30px 20px 40px;color:var(--muted);border-top:1px solid rgba(201,162,39,.2);font-size:.9rem;line-height:1.8}
+footer strong{color:var(--gold2);font-weight:600}
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <a class="brand" href="index.html">SALUD Y VIDA<small>RECORDS</small></a>
+  <a class="back" href="index.html">← Inicio</a>
+</div></header>
+
+<section class="hero">
+  <div class="tag">TODO SE TRATA DE JESÚS</div>
+  <h1>Top <span>100</span> Cánticos</h1>
+  <p>Los cánticos más escuchados por nuestra familia en YouTube. La Palabra de Dios hecha canto — cada cántico nace de un pasaje de la Santa Biblia (RVR1909).</p>
+</section>
+
+<div class="tools">
+  <input class="search" id="q" type="search" placeholder="Buscar por título o pasaje (ej. Juan, Salmo, Isaías)…" aria-label="Buscar cántico">
+  <span class="count" id="count"></span>
+</div>
+
+<main class="grid" id="grid"></main>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+  <div class="player">
+    <div class="frame" id="frame"></div>
+    <div class="ptitle">
+      <div><h2 id="mt"></h2><div class="ref" id="mr"></div></div>
+      <div class="btns">
+        <a class="btn" id="yt" target="_blank" rel="noopener">Ver en YouTube</a>
+        <button class="btn primary" id="close">Cerrar ✕</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div>Actualizado: noviembre 2026 · Ranking por reproducciones en YouTube</div>
+  <div><strong>© Salud y Vida Records — Siervo del Señor Juan Cisneros</strong></div>
+</footer>
+
+<script>
+const SONGS = [{"rank":1,"title":"JESÚS, NOMBRE SOBRE TODO NOMBRE","ref":"Filipenses 2:9","id":"EuGu78su9ik","views":384192},{"rank":2,"title":"¿A QUIÉN IRÉ?","ref":"Juan 6:68","id":"cfMRmA2M9WY","views":276336},{"rank":3,"title":"LA CANCIÓN DEL AMOR ETERNO","ref":"De Génesis a Apocalipsis","id":"HXLxK94X5aE","views":232036},{"rank":4,"title":"BARRO EN TUS MANOS","ref":"Isaías 64:8","id":"oCqzGAAeBXs","views":201744},{"rank":5,"title":"QUIERO SER COMO TÚ, SEÑOR","ref":"Mateo 5:8","id":"saoPF65hKi4","views":108717},{"rank":6,"title":"JUSTICIA DE DIOS","ref":"Deuteronomio 32:4","id":"rVEo3h-mIzI","views":73739},{"rank":7,"title":"SÁNAME, ESCUDRIÑA, FORTALECE","ref":"Jeremías 17","id":"LQhV0c8C_po","views":47684},{"rank":8,"title":"EN MEDIO DEL DOLOR","ref":"Génesis 3:16–19","id":"tJVsn-ZKpeo","views":32995},{"rank":9,"title":"¡VELAD!","ref":"Marcos 13","id":"gRTWCl9cKdM","views":25705},{"rank":10,"title":"EN LA CASA DEL ALFARERO","ref":"Jeremías 18","id":"lbCKcC_UJ3w","views":23414},{"rank":11,"title":"LOS QUE PIENSAN EN DIOS","ref":"Malaquías 3:1","id":"YjooEWrht_4","views":22262},{"rank":12,"title":"SOLO A TI, SEÑOR","ref":"2 Reyes 10","id":"cuSAC_XpBgc","views":21471},{"rank":13,"title":"EL MAYOR DE ELLOS ES EL AMOR","ref":"1 Juan 4","id":"ZQbH53iFH-4","views":20392},{"rank":14,"title":"JESÚS… JESÚS… JESÚS","ref":"Filipenses 2:9–11","id":"LbvWOxabVnI","views":17033},{"rank":15,"title":"TODO SE TRATA DE JESÚS","ref":"Colosenses 1:17–18","id":"R4_hBQyIIxw","views":17002},{"rank":16,"title":"EL CAMINANTE DE LA JUSTICIA DE DIOS POR MEDIO DE LA FE","ref":"","id":"HExv-xIBaeo","views":16275},{"rank":17,"title":"HIJO DEL ALTÍSIMO","ref":"","id":"KQ3fcCIxOK0","views":14490},{"rank":18,"title":"DE ADÁN A CRISTO","ref":"Lucas 3:23–38","id":"N4DZXPmqIEg","views":13512},{"rank":19,"title":"LOS 66 LIBROS","ref":"Toda la Biblia","id":"LmU5GUxr0fw","views":12275},{"rank":20,"title":"EN ENTENDIMIENTO ME ABRISTE LOS OJOS","ref":"","id":"kAPI-6sLVwg","views":11055},{"rank":21,"title":"EL ANTIGUO Y EL NUEVO TESTAMENTO","ref":"Toda la Biblia","id":"PUVQ_63scn8","views":10904},{"rank":22,"title":"FUEGO EN MIS HUESOS","ref":"Jeremías 20","id":"jvTpFFwuU8Q","views":10564},{"rank":23,"title":"HERMOSA EN LOS OJOS DE DIOS","ref":"","id":"N3cy7kXtE9Q","views":9385},{"rank":24,"title":"TU VOZ ESTÁ EN LA PALABRA","ref":"Hebreos 1:1–2","id":"_gHJ9B7QPbQ","views":9070},{"rank":25,"title":"AMOR, AMOR QUE PERDONA","ref":"1 Corintios 13:4–8","id":"0lm0w1171ys","views":8766},{"rank":26,"title":"FUIMOS ESCOGIDOS EN SU AMOR ETERNO","ref":"Efesios 1","id":"MqdcTaCcYOw","views":8250},{"rank":27,"title":"PADRE DE GLORIA","ref":"Génesis 1","id":"_7HyhUFg09A","views":7741},{"rank":28,"title":"PALABRAS QUE VIVEN","ref":"Salmo 119:105","id":"alxpcPqgePA","views":7403},{"rank":29,"title":"MÁS QUE VENCEDORES","ref":"Romanos 8:1","id":"0xceAMzESB4","views":7299},{"rank":30,"title":"EL VERBO ETERNO","ref":"Juan 1","id":"_MXEOsK4kr4","views":7013},{"rank":31,"title":"EL PRINCIPIO DE LA SABIDURÍA","ref":"","id":"S4ZfW6jS19Q","views":6866},{"rank":32,"title":"JESÚS, ABRE MIS OJOS","ref":"Juan 9:25","id":"8sInPR6IwgE","views":6853},{"rank":33,"title":"DIOS EL NOMBRE QUE RESUENA EN TODA LA HISTORIA HUMANA","ref":"","id":"ppft7Zz5b8w","views":6221},{"rank":34,"title":"EL MENSAJE ETERNO DE DIOS AL HOMBRE","ref":"2 Timoteo 3:16","id":"QZKxf3_RKKg","views":5982},{"rank":35,"title":"EL FIN VIENE","ref":"Ezequiel 7","id":"QXcXyMksRUg","views":5723},{"rank":36,"title":"OH SEÑOR, MI FUNDAMENTO","ref":"","id":"OIFqf39nzlg","views":5690},{"rank":37,"title":"SOY BARRO EN TUS MANOS, ALFARERO","ref":"Isaías 64:8","id":"pvnl_6fmPmI","views":5436},{"rank":38,"title":"EL TEMOR DE JEHOVÁ COMO FUNDAMENTO","ref":"Proverbios 9:10","id":"triY6qSdFcs","views":5363},{"rank":39,"title":"TODA LENGUA CONFESARÁ","ref":"Filipenses 2:11","id":"Q_PAGYOyEqU","views":5223},{"rank":40,"title":"LA CANCIÓN DE LOS 66 LIBROS","ref":"","id":"d42B1XaakB4","views":5119},{"rank":41,"title":"EL CAMINANTE","ref":"Génesis 12:1–4","id":"BRgwkz7gMy8","views":4948},{"rank":42,"title":"¡MI ROCA VIVE!","ref":"2 Samuel 22","id":"ZYFl6SvocDI","views":4364},{"rank":43,"title":"JEHOVÁ ESTÁ CONMIGO","ref":"Salmo 118:6","id":"UYD2FYDSkuo","views":4167},{"rank":44,"title":"VIDA EN EL VALLE DE HUESOS SECOS","ref":"","id":"vX0wuEtVL3s","views":3984},{"rank":45,"title":"RAÍCES EN MI CORAZÓN","ref":"Efesios 3:17","id":"6HUpVVm3u2o","views":3910},{"rank":46,"title":"CLAMA A MÍ Y YO TE RESPONDERÉ","ref":"Jeremías 33:3","id":"3oC1ovF4sJ4","views":3902},{"rank":47,"title":"LÁZARO, VEN FUERA","ref":"Juan 11","id":"XjcJaQ4FXDQ","views":3874},{"rank":48,"title":"CONOCER A DIOS","ref":"Juan 17:3","id":"Syg-1s2a748","views":3868},{"rank":49,"title":"SI JEHOVÁ NO EDIFICARE LA CASA","ref":"Salmo 127:1","id":"xB7BCBLIthk","views":3771},{"rank":50,"title":"SOLO A TI ADORARÉ","ref":"Éxodo 20:3–5","id":"RqiBkBlzFAU","views":3740},{"rank":51,"title":"SE ENCONTRARON EN LA CRUZ","ref":"Salmo 85:10","id":"E1Wa-4rxCSs","views":3707},{"rank":52,"title":"LA VIDA","ref":"Hechos 17:28","id":"2Yh03-1lpQk","views":3705},{"rank":53,"title":"SÁNAME, OH JEHOVÁ, Y SERÉ SANO; SÁLVAME, Y SERÉ SALVO","ref":"Jeremías 17:14","id":"d8EhGwhOvIU","views":3662},{"rank":54,"title":"VICTORIA ETERNA EN CRISTO","ref":"1 Corintios 15","id":"cpO63ZZI8zU","views":3613},{"rank":55,"title":"COMO LADRÓN EN LA NOCHE","ref":"","id":"Gp5hGc03KUc","views":3473},{"rank":56,"title":"EL ALTAR DE LA MISERICORDIA","ref":"","id":"s1Gu53bQCl0","views":3392},{"rank":57,"title":"JESÚS, JESÚS, PODER EN TU NOMBRE","ref":"Juan 15:24","id":"16zCoSj6Jd8","views":3361},{"rank":58,"title":"EL DIOS QUE PESE LAS ALMAS","ref":"","id":"N1NDJnDFcTQ","views":3360},{"rank":59,"title":"LOS 7 PACTOS DE DIOS","ref":"","id":"rnmjhyEnu44","views":3283},{"rank":60,"title":"POR AMOR DE TI MISMO","ref":"Daniel 9:3–19","id":"H0PnY3slJbo","views":3274},{"rank":61,"title":"MAYOR MANDAMIENTO","ref":"Marcos 12","id":"JT1LR6hOtqY","views":3245},{"rank":62,"title":"¿QUIÉN DICE LA GENTE QUE SOY YO?","ref":"Mateo 16","id":"9kPDtuLVVsM","views":3243},{"rank":63,"title":"¿DÓNDE ESTÁ, OH MUERTE, TU AGUIJÓN?","ref":"1 Corintios 15:55","id":"Dhol5OTMYAI","views":3228},{"rank":64,"title":"UN DÍA TODAS LAS NACIONES DOBLARÁN RODILLA","ref":"Filipenses 2:10–11","id":"8q3Y_VqIjiY","views":3115},{"rank":65,"title":"GRANDE ES TU FIDELIDAD","ref":"Lamentaciones 3","id":"3AX5aTacp0s","views":3098},{"rank":66,"title":"EL VALLE DE LOS HUESOS SECOS","ref":"Ezequiel 37","id":"91JvWjsKslA","views":3048},{"rank":67,"title":"SOBERANO DIOS","ref":"Salmo 103:19","id":"GThWTnEDEuM","views":2980},{"rank":68,"title":"EN EL PRINCIPIO DIOS","ref":"Génesis 1","id":"oFEfWnnAqck","views":2842},{"rank":69,"title":"TODO EN CRISTO SOY","ref":"","id":"b3B8UTv5pAM","views":2841},{"rank":70,"title":"EN ÉL VIVIMOS","ref":"Hechos 17:28","id":"gOkq12pmuJQ","views":2822},{"rank":71,"title":"DE MIS HERIDAS BROTA MÚSICA","ref":"Jeremías 20:9","id":"bwepUrwfZ8A","views":2806},{"rank":72,"title":"LÍMPIAME, OH DIOS","ref":"Salmo 51:1–12","id":"Oqba05XXAkA","views":2744},{"rank":73,"title":"AGUIJÓN EN LA CARNE","ref":"2 Corintios 12:9","id":"n4ezkTLJ6IY","views":2686},{"rank":74,"title":"LAS ESCRITURAS HABLAN DE JESÚS","ref":"","id":"SCNg41uhxwE","views":2658},{"rank":75,"title":"OH DULCE JESÚS","ref":"Salmo 34:8","id":"EkIW3TVtgbQ","views":2605},{"rank":76,"title":"¡NO ENTRARÁ EL ENEMIGO!","ref":"2 Reyes 19","id":"gGi-Ipt2z50","views":2594},{"rank":77,"title":"TÓCAME, SEÑOR","ref":"Mateo 8:3","id":"0Dzw_veWjvs","views":2575},{"rank":78,"title":"CAMINO A EMAÚS","ref":"Lucas 24","id":"q5IK01m2FlI","views":2564},{"rank":79,"title":"LA MIES ES MUCHA","ref":"Lucas 10:2","id":"iAgoSh9ptsc","views":2557},{"rank":80,"title":"TU ROSTRO QUIERO BUSCAR","ref":"","id":"TNZzgqWVObE","views":2479},{"rank":81,"title":"LA CANCIÓN DEL DOLOR","ref":"","id":"s04SrJIXHvk","views":2472},{"rank":82,"title":"ISRAEL, AMADO DE JEHOVÁ","ref":"Ezequiel 5:5","id":"XK330sGwbpM","views":2457},{"rank":83,"title":"JESÚS ME PREGUNTA: ¿ME AMAS?","ref":"Juan 21","id":"ckQQ1b2M9Gk","views":2456},{"rank":84,"title":"EL CUIDADO TIERNO DE DIOS Y EL PODER DEL SILENCIO","ref":"1 Reyes 19","id":"-9VZZ5s1p9k","views":2406},{"rank":85,"title":"TODO LO PUEDO EN CRISTO","ref":"Filipenses 4","id":"c1-XVywEYxo","views":2397},{"rank":86,"title":"SÉ PROPICIO A MÍ, PECADOR","ref":"Lucas 18","id":"Mg_GWDnk6-Y","views":2373},{"rank":87,"title":"AGRADECIDO POR LA VIDA","ref":"","id":"4g7g0O0SCIc","views":2350},{"rank":88,"title":"PAPÁ, ABBA, ¿ME AMAS?","ref":"Jeremías 31:3","id":"N_i5kr1TZE8","views":2332},{"rank":89,"title":"RESURRECCIÓN","ref":"","id":"zSlHZ5IkrTM","views":2257},{"rank":90,"title":"TEJIDO Y HECHO PARA DIOS","ref":"Salmo 139:13","id":"VDymBA2RL6Q","views":2248},{"rank":91,"title":"BUSCADME Y VIVIRÉIS","ref":"Amós 5","id":"KKOEIiFtrzI","views":2244},{"rank":92,"title":"¿A DÓNDE ME IRÉ DE TU ESPÍRITU?","ref":"Salmo 139:7","id":"KxZdew3RHBA","views":2174},{"rank":93,"title":"EL CIELO ABIERTO SOBRE UN CORAZÓN HUMILDE","ref":"","id":"LMCOMNopMx8","views":2111},{"rank":94,"title":"MÁS SON LOS QUE ESTÁN CON NOSOTROS","ref":"2 Reyes 6","id":"HCSWMT4TaDY","views":2095},{"rank":95,"title":"ALMA MÍA, NO OLVIDES SUS BENEFICIOS","ref":"Salmo 103:1–5","id":"drJwQwSMCEk","views":2083},{"rank":96,"title":"SIEMBRA Y COSECHA","ref":"Gálatas 6:7–9","id":"TBtTgCanyQI","views":2001},{"rank":97,"title":"SEÑOR, SEÑOR","ref":"Lucas 6:46","id":"yr2MPVp1gWU","views":1996},{"rank":98,"title":"NO LO MEREZCO, PERO JESÚS","ref":"Romanos 5:8","id":"LksVDS-kBvk","views":1993},{"rank":99,"title":"JEHOVÁ, MI LUZ Y MI DEFENSOR","ref":"Salmos 35 y 27","id":"vETOaZxZ3BM","views":1981},{"rank":100,"title":"CONFÍO AL CIEN","ref":"Salmo 28:7","id":"EgEVmbvZE1g","views":1941}];
+
+const grid = document.getElementById('grid'), q = document.getElementById('q'), count = document.getElementById('count');
+const modal = document.getElementById('modal'), frame = document.getElementById('frame');
+const fmt = n => n >= 1000 ? (n/1000).toLocaleString('es', {maximumFractionDigits: n >= 100000 ? 0 : 1}) + ' mil' : n;
+const norm = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function render(list){
+  grid.innerHTML = list.length ? list.map(s => `
+    <article class="card ${s.rank<=3?'top3':''}" tabindex="0" data-id="${s.id}" aria-label="Escuchar ${esc(s.title)}">
+      <div class="thumb">
+        <img loading="lazy" src="https://i.ytimg.com/vi/${s.id}/hqdefault.jpg" alt="" onerror="this.style.visibility='hidden'">
+        <div class="rank">#${s.rank}</div>
+        <div class="play"><span></span></div>
+      </div>
+      <div class="info">
+        <div class="title">${esc(s.title)}</div>
+        ${s.ref ? `<div class="ref">📖 ${esc(s.ref)}</div>` : ''}
+        <div class="views">${fmt(s.views)} reproducciones</div>
+      </div>
+    </article>`).join('') : '<div class="empty">No se encontró ningún cántico.</div>';
+  count.textContent = list.length + ' de ' + SONGS.length + ' cánticos';
+}
+
+function open(id){
+  const s = SONGS.find(x => x.id === id); if(!s) return;
+  frame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="${esc(s.title)}"></iframe>`;
+  document.getElementById('mt').textContent = '#' + s.rank + ' · ' + s.title;
+  document.getElementById('mr').textContent = s.ref ? '📖 ' + s.ref + ' (RVR1909)' : '';
+  document.getElementById('yt').href = 'https://www.youtube.com/watch?v=' + id;
+  modal.classList.add('open'); document.body.style.overflow = 'hidden';
+}
+function close(){ modal.classList.remove('open'); frame.innerHTML = ''; document.body.style.overflow = ''; }
+
+grid.addEventListener('click', e => { const c = e.target.closest('.card'); if(c) open(c.dataset.id); });
+grid.addEventListener('keydown', e => { if(e.key === 'Enter'){ const c = e.target.closest('.card'); if(c) open(c.dataset.id); } });
+document.getElementById('close').onclick = close;
+modal.addEventListener('click', e => { if(e.target === modal) close(); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape') close(); });
+q.addEventListener('input', () => { const t = norm(q.value.trim()); render(t ? SONGS.filter(s => norm(s.title + ' ' + s.ref).includes(t)) : SONGS); });
+
+render(SONGS);
+</script>
+</body>
+</html>
