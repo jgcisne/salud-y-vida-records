@@ -13,7 +13,7 @@ const canonica = new URL(Astro.url.pathname, Astro.site);
 const ogImg = new URL(imagen, Astro.site);
 const ruta = Astro.url.pathname;
 const menu = [
-  ['/', 'Inicio'], ['/musica/', 'Cánticos'], ['/youtube/', 'YouTube'], ['/biblia/', 'Biblia'],
+  ['/', 'Inicio'], ['/top100', 'Cánticos'], ['/youtube/', 'YouTube'], ['/biblia/', 'Biblia'],
   ['/reflexiones/', 'Reflexiones'], ['/novedades/', 'Novedades'], ['/app/', 'App'], ['/nosotros/', 'Nosotros'], ['/contacto/', 'Contacto'],
 ];
 const actual = (h: string) => (h === '/' ? ruta === '/' : ruta.startsWith(h));
@@ -86,7 +86,7 @@ const org = {
           <p style="font-family:var(--f-titulo);font-style:italic;font-size:24px;margin:10px 0 4px">{sitio.lema}</p>
           <p style="color:var(--ink-2)">Cánticos bíblicos y reflexiones basados en la Santa Biblia Reina-Valera 1909 (RVR1909).</p>
         </div>
-        <div><h2>EXPLORAR</h2><ul><li><a href="/musica/">Cánticos</a></li><li><a href="/youtube/">Canal de YouTube</a></li><li><a href="/biblia/">Biblia RVR1909</a></li><li><a href="/reflexiones/">Reflexiones</a></li></ul></div>
+        <div><h2>EXPLORAR</h2><ul><li><a href="/top100">Cánticos</a></li><li><a href="/youtube/">Canal de YouTube</a></li><li><a href="/biblia/">Biblia RVR1909</a></li><li><a href="/reflexiones/">Reflexiones</a></li></ul></div>
         <div><h2>MINISTERIO</h2><ul><li><a href="/nosotros/">Sobre nosotros</a></li><li><a href="/novedades/">Novedades</a></li><li><a href="/app/">Aplicación</a></li><li><a href="/favoritos/">Mis favoritos</a></li></ul></div>
         <div><h2>CONTACTO</h2><ul><li><a href="/contacto/">Escríbanos</a></li>{sitio.youtube.urlCanal && <li><a href={sitio.youtube.urlCanal} rel="noopener" target="_blank">YouTube</a></li>}<li><a href="/contacto/#privacidad">Privacidad</a></li></ul></div>
       </div>
