@@ -50,7 +50,7 @@ const novedades = (await novedadesOrdenadas()).slice(0, 3);
       {destacados.length
         ? <div class="carrusel" id="carrusel" tabindex="0" aria-label="Carrusel de cánticos destacados">{destacados.map((c) => <TarjetaCantico c={c.data} id={c.id} />)}</div>
         : <div class="vacio"><h3>Pronto habrá cánticos aquí</h3></div>}
-      <p style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-oro" href="/top100">VER TOP 100 CÁNTICOS</a><a class="btn btn-borde" href="/musica/">Ver toda la biblioteca musical</a></p>
+      <p style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-oro" href="/top100">VER TOP 100 CÁNTICOS</a><a class="btn btn-borde" href="/todos-los-canticos">VER TODOS LOS CÁNTICOS</a></p>
     </div>
   </section>
 
