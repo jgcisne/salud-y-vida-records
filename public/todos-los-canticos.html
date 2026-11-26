@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Todos los Cánticos — Salud y Vida Records</title>
+<meta name="description" content="Todos los cánticos bíblicos de Salud y Vida Records en un solo lugar: más escuchados, de la A a la Z y más recientes. La Palabra de Dios hecha canto (RVR1909).">
+<link rel="preconnect" href="https://i.ytimg.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0b1533;--navy2:#132150;--card:#16245a;--gold:#c9a227;--gold2:#f2cf5b;--text:#eef1f8;--muted:#aab3cf}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:radial-gradient(ellipse at top,#22357a 0%,var(--navy) 55%) fixed;color:var(--text);min-height:100vh}
+a{color:inherit;text-decoration:none}
+header{position:sticky;top:0;z-index:10;background:rgba(11,21,51,.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(201,162,39,.25)}
+.bar{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:12px}
+.brand{font-family:Cinzel,serif;font-weight:700;letter-spacing:.06em;line-height:1}
+.brand small{display:block;color:var(--gold);font-size:.7em;letter-spacing:.25em;margin-top:3px}
+.back{border:1px solid rgba(201,162,39,.5);border-radius:999px;padding:8px 16px;font-weight:600;font-size:.9rem;color:var(--gold2)}
+.back:hover{background:rgba(201,162,39,.12)}
+.hero{text-align:center;padding:56px 20px 28px;max-width:820px;margin:auto}
+.hero .tag{color:var(--gold);font-family:Cinzel,serif;letter-spacing:.3em;font-size:.8rem}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,6vw,4rem);margin:10px 0 12px;font-weight:700}
+.hero h1 span{color:var(--gold2)}
+.hero p{color:var(--muted);font-size:1.05rem;line-height:1.6}
+.tools{max-width:1200px;margin:0 auto 24px;padding:0 20px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.search{flex:1;min-width:220px;background:var(--navy2);border:1px solid rgba(201,162,39,.35);border-radius:999px;padding:13px 20px;color:var(--text);font-size:1rem;outline:none}
+.search:focus{border-color:var(--gold2)}
+.count{color:var(--muted);font-size:.9rem}
+.grid{max-width:1200px;margin:0 auto;padding:0 20px 60px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.card{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:16px;overflow:hidden;cursor:pointer;transition:transform .2s,border-color .2s,box-shadow .2s;display:flex;flex-direction:column}
+.card:hover,.card:focus-visible{transform:translateY(-4px);border-color:rgba(242,207,91,.6);box-shadow:0 12px 30px rgba(0,0,0,.35);outline:none}
+.thumb{position:relative;aspect-ratio:16/9;background:#0a1230}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.rank{position:absolute;top:10px;left:10px;background:rgba(11,21,51,.85);border:1px solid var(--gold);color:var(--gold2);font-family:Cinzel,serif;font-weight:700;border-radius:10px;padding:4px 10px;font-size:.95rem}
+.top3 .rank{background:linear-gradient(135deg,#f2cf5b,#c9a227);color:#1b1400;border:none}
+.play{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transition:opacity .2s;background:rgba(0,0,0,.25)}
+.card:hover .play{opacity:1}
+.play span{width:62px;height:62px;border-radius:50%;background:var(--gold2);display:grid;place-items:center;box-shadow:0 6px 20px rgba(0,0,0,.4)}
+.play span::after{content:"";border-left:20px solid #1b1400;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px}
+.info{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.22rem;line-height:1.2}
+.ref{color:var(--gold2);font-size:.85rem}
+.views{color:var(--muted);font-size:.8rem;margin-top:auto}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:40px}
+.modal{position:fixed;inset:0;background:rgba(3,6,18,.88);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+.modal.open{display:flex}
+.player{width:min(960px,100%)}
+.frame{aspect-ratio:16/9;background:#000;border-radius:14px;overflow:hidden}
+.frame iframe{width:100%;height:100%;border:0}
+.ptitle{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+.ptitle h2{font-family:'Cormorant Garamond',serif;font-size:1.5rem}
+.ptitle .ref{font-size:.95rem}
+.btns{display:flex;gap:10px}
+.btn{border-radius:999px;padding:9px 16px;font-weight:600;font-size:.9rem;border:1px solid var(--gold);color:var(--gold2);background:transparent;cursor:pointer}
+.btn.primary{background:var(--gold2);color:#1b1400;border-color:var(--gold2)}
+footer{text-align:center;padding:30px 20px 40px;color:var(--muted);border-top:1px solid rgba(201,162,39,.2);font-size:.9rem;line-height:1.8}
+footer strong{color:var(--gold2);font-weight:600}
+
+.sorts{display:flex;gap:8px;flex-wrap:wrap}
+.sort{border-radius:999px;padding:10px 16px;font-weight:600;font-size:.9rem;border:1px solid rgba(201,162,39,.5);color:var(--gold2);background:transparent;cursor:pointer}
+.sort[aria-pressed="true"]{background:var(--gold2);color:#1b1400;border-color:var(--gold2)}
+.letters{max-width:1200px;margin:-8px auto 22px;padding:0 20px;display:none;flex-wrap:wrap;gap:6px}
+.letters.on{display:flex}
+.letters button{min-width:38px;height:38px;border-radius:10px;border:1px solid rgba(201,162,39,.35);background:var(--navy2);color:var(--text);font-weight:600;cursor:pointer}
+.letters button:disabled{opacity:.3;cursor:default}
+.letters button:not(:disabled):hover{border-color:var(--gold2);color:var(--gold2)}
+.sep{grid-column:1/-1;font-family:Cinzel,serif;color:var(--gold2);font-size:1.6rem;border-bottom:1px solid rgba(201,162,39,.3);padding:8px 0 4px;scroll-margin-top:90px}
+.more{display:block;margin:0 auto 60px;border-radius:999px;padding:14px 28px;font-weight:700;font-size:1rem;background:var(--gold2);color:#1b1400;border:none;cursor:pointer}
+.nav2{display:flex;gap:10px;flex-wrap:wrap}
+@media (max-width:600px){.sort{padding:9px 12px;font-size:.85rem}.hero{padding-top:36px}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <a class="brand" href="/">SALUD Y VIDA<small>RECORDS</small></a>
+  <div class="nav2"><a class="back" href="/top100">Top 100</a><a class="back" href="/">← Inicio</a></div>
+</div></header>
+
+<section class="hero">
+  <div class="tag">TODO SE TRATA DE JESÚS</div>
+  <h1>Todos los <span>Cánticos</span></h1>
+  <p>Toda nuestra biblioteca de cánticos bíblicos en un solo lugar, sin repetidos. Cada cántico nace de un pasaje de la Santa Biblia (RVR1909).</p>
+</section>
+
+<div class="tools">
+  <input class="search" id="q" type="search" placeholder="Buscar por título o pasaje (ej. Juan, Salmo, Isaías)…" aria-label="Buscar cántico">
+  <div class="sorts" role="group" aria-label="Ordenar">
+    <button class="sort" data-s="pop" aria-pressed="true">Más escuchados</button>
+    <button class="sort" data-s="az" aria-pressed="false">A–Z</button>
+    <button class="sort" data-s="new" aria-pressed="false">Más recientes</button>
+  </div>
+  <span class="count" id="count"></span>
+</div>
+<nav class="letters" id="letters" aria-label="Ir a la letra"></nav>
+
+<main class="grid" id="grid"><div class="empty">Cargando cánticos…</div></main>
+<button class="more" id="more" hidden>Mostrar más cánticos</button>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+  <div class="player">
+    <div class="frame" id="frame"></div>
+    <div class="ptitle">
+      <div><h2 id="mt"></h2><div class="ref" id="mr"></div></div>
+      <div class="btns">
+        <a class="btn" id="yt" target="_blank" rel="noopener">Ver en YouTube</a>
+        <button class="btn primary" id="close">Cerrar ✕</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div>Cánticos de nuestro canal de YouTube · cada reproducción cuenta en YouTube</div>
+  <div><strong>© Salud y Vida Records — Siervo del Señor Juan Cisneros</strong></div>
+</footer>
+
+<script>
+(function(){
+const PAGE = 60;
+let ALL = [], list = [], shown = 0, sort = 'pop';
+const $ = id => document.getElementById(id);
+const grid = $('grid'), q = $('q'), count = $('count'), more = $('more'), letters = $('letters'), modal = $('modal'), frame = $('frame');
+const norm = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt = n => n >= 1000 ? (n/1000).toLocaleString('es', {maximumFractionDigits: n >= 100000 ? 0 : 1}) + ' mil' : String(n);
+const letterOf = s => { const m = norm(s).match(/[a-z0-9]/); if(!m) return '#'; return /[0-9]/.test(m[0]) ? '#' : m[0].toUpperCase(); };
+const azKey = s => norm(s).replace(/^[^a-z0-9]+/, '');
+
+function card(s){
+  return `<article class="card ${sort==='pop'&&s.rank<=3?'top3':''}" tabindex="0" data-id="${s.id}" aria-label="Escuchar ${esc(s.t)}">
+    <div class="thumb">
+      <img loading="lazy" src="https://i.ytimg.com/vi/${s.id}/hqdefault.jpg" alt="" onerror="this.style.visibility='hidden'">
+      ${sort==='pop' ? `<div class="rank">#${s.rank}</div>` : ''}
+      <div class="play"><span></span></div>
+    </div>
+    <div class="info">
+      <div class="title">${esc(s.t)}</div>
+      ${s.r ? `<div class="ref">📖 ${esc(s.r)}</div>` : ''}
+      <div class="views">${fmt(s.v)} reproducciones</div>
+    </div>
+  </article>`;
+}
+
+function build(){
+  const t = norm(q.value.trim());
+  list = t ? ALL.filter(s => norm(s.t + ' ' + s.r).includes(t)) : ALL.slice();
+  if (sort === 'az') list.sort((a,b) => azKey(a.t).localeCompare(azKey(b.t), 'es'));
+  else if (sort === 'new') list.sort((a,b) => a.o - b.o);
+  else list.sort((a,b) => b.v - a.v);
+  shown = 0; grid.innerHTML = '';
+  if (!list.length) grid.innerHTML = '<div class="empty">No se encontró ningún cántico.</div>';
+  drawLetters(); page();
+}
+function page(upto){
+  const end = Math.min(list.length, upto || shown + PAGE);
+  let html = '', last = shown ? letterOf(list[shown-1].t) : null;
+  for (let i = shown; i < end; i++){
+    const s = list[i];
+    if (sort === 'az'){ const L = letterOf(s.t); if (L !== last){ html += `<h2 class="sep" id="L-${L}">${L}</h2>`; last = L; } }
+    html += card(s);
+  }
+  grid.insertAdjacentHTML('beforeend', html);
+  shown = end;
+  more.hidden = shown >= list.length;
+  count.textContent = list.length.toLocaleString('es') + (list.length === ALL.length ? ' cánticos' : ' de ' + ALL.length.toLocaleString('es') + ' cánticos');
+}
+function drawLetters(){
+  letters.classList.toggle('on', sort === 'az');
+  if (sort !== 'az') return;
+  const have = new Set(list.map(s => letterOf(s.t)));
+  letters.innerHTML = ['#',...'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'].map(L => `<button data-l="${L}" ${have.has(L)?'':'disabled'}>${L}</button>`).join('');
+}
+letters.addEventListener('click', e => {
+  const b = e.target.closest('button'); if(!b || b.disabled) return;
+  const L = b.dataset.l, idx = list.findIndex(s => letterOf(s.t) === L);
+  if (idx >= shown) page(Math.min(list.length, idx + PAGE));
+  const el = document.getElementById('L-' + L); if (el) el.scrollIntoView({behavior:'smooth'});
+});
+
+function open(id){
+  const s = ALL.find(x => x.id === id); if(!s) return;
+  frame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="${esc(s.t)}"></iframe>`;
+  $('mt').textContent = s.t;
+  $('mr').textContent = s.r ? '📖 ' + s.r + ' (RVR1909)' : '';
+  $('yt').href = 'https://www.youtube.com/watch?v=' + id;
+  modal.classList.add('open'); document.body.style.overflow = 'hidden';
+}
+function close(){ modal.classList.remove('open'); frame.innerHTML = ''; document.body.style.overflow = ''; }
+
+grid.addEventListener('click', e => { const c = e.target.closest('.card'); if(c) open(c.dataset.id); });
+grid.addEventListener('keydown', e => { if(e.key === 'Enter'){ const c = e.target.closest('.card'); if(c) open(c.dataset.id); } });
+$('close').onclick = close;
+modal.addEventListener('click', e => { if(e.target === modal) close(); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape') close(); });
+more.onclick = () => page();
+let tmr; q.addEventListener('input', () => { clearTimeout(tmr); tmr = setTimeout(build, 150); });
+document.querySelectorAll('.sort').forEach(b => b.onclick = () => {
+  sort = b.dataset.s;
+  document.querySelectorAll('.sort').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  build();
+});
+
+fetch('/canticos-todos.json').then(r => r.json()).then(d => {
+  ALL = d.slice().sort((a,b) => b.v - a.v);
+  ALL.forEach((s,i) => s.rank = i + 1);
+  build();
+}).catch(() => { grid.innerHTML = '<div class="empty">No se pudieron cargar los cánticos. Actualice la página.</div>'; });
+})();
+</script>
+</body>
+</html>
